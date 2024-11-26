@@ -15,14 +15,14 @@ application = app
 @app.route('/', methods=['GET', 'POST'])
 def addition_api():
     # return "Hello"
-    output_path = r"DataSet\Output\mereged.mp4"
+    output_path = r"website\DataSet\Output\mereged.mp4"
     
     num1 = random.randint(0, 10)
     num2 = random.randint(0, 10)
 
     add = num1 + num2
-    df = pd.read_csv(r'static\number.csv')
-    op = pd.read_csv(r'static\operator.csv')
+    df = pd.read_csv(r'website\static\number.csv')
+    op = pd.read_csv(r'website\static\operator.csv')
 
     filtered_df1 = df[df['Number'] == num1]
     filtered_op = op[op['Operator'] == '+']
