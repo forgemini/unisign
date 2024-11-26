@@ -2,7 +2,7 @@ from flask import Flask, Blueprint , jsonify
 import pandas as pd
 import cv2 , base64
 import os
-from moviepy.editor import VideoFileClip, concatenate_videoclips
+# from moviepy.editor import VideoFileClip, concatenate_videoclips
 import random
 import numpy as np
 import imageio
@@ -15,35 +15,35 @@ application = app
 @app.route('/', methods=['GET', 'POST'])
 def addition_api():
     # return "Hello"
-    output_path = r"website\DataSet\Output\mereged.mp4"
+    # output_path = r"website\DataSet\Output\mereged.mp4"
     
-    num1 = random.randint(0, 10)
-    num2 = random.randint(0, 10)
+    # num1 = random.randint(0, 10)
+    # num2 = random.randint(0, 10)
 
-    add = num1 + num2
-    df = pd.read_csv(r'website\static\number.csv')
-    op = pd.read_csv(r'website\static\operator.csv')
+    # add = num1 + num2
+    # df = pd.read_csv(r'website\static\number.csv')
+    # op = pd.read_csv(r'website\static\operator.csv')
 
-    filtered_df1 = df[df['Number'] == num1]
-    filtered_op = op[op['Operator'] == '+']
-    filtered_df2 = df[df['Number'] == num2]
-    filtered_sum = df[df['Number'] == add]
+    # filtered_df1 = df[df['Number'] == num1]
+    # filtered_op = op[op['Operator'] == '+']
+    # filtered_df2 = df[df['Number'] == num2]
+    # filtered_sum = df[df['Number'] == add]
 
-    filtered_df = [filtered_df1, filtered_op,  filtered_df2, filtered_sum]
+    # filtered_df = [filtered_df1, filtered_op,  filtered_df2, filtered_sum]
 
-    found_links = False
-    folder_path = []
-    for fd in filtered_df:
-        if not fd.empty:
-            found_links = True
+    # found_links = False
+    # folder_path = []
+    # for fd in filtered_df:
+    #     if not fd.empty:
+    #         found_links = True
 
-            for link in fd['Links']:
-                folder_path.append(link)
+    #         for link in fd['Links']:
+    #             folder_path.append(link)
 
-    if not found_links:
-        print(f"No links found for the specified numbers.")
+    # if not found_links:
+    #     print(f"No links found for the specified numbers.")
 
-    video_extensions = ('.mp4', '.avi', '.mov', '.mkv')
+    # video_extensions = ('.mp4', '.avi', '.mov', '.mkv')
 
     def video_return(video_path):
         try:
@@ -65,22 +65,22 @@ def addition_api():
 
         return jsonify({"data": frames_list})
 
-    def merge_videos(video_path, output_path):
+    # def merge_videos(video_path, output_path):
 
-        clip = [VideoFileClip(video_path) for video_path in video_path]
+    #     clip = [VideoFileClip(video_path) for video_path in video_path]
 
-        merged_clip = concatenate_videoclips(clip)
-        merged_clip.write_videofile(output_path, codec='libx264')
+    #     merged_clip = concatenate_videoclips(clip)
+    #     merged_clip.write_videofile(output_path, codec='libx264')
 
-        # for frame in merged_clip.iter_frames(fps=60, dtype='uint8'):
-        #     yield frame
+    #     # for frame in merged_clip.iter_frames(fps=60, dtype='uint8'):
+    #     #     yield frame
 
-    video_files = []
-    for folder in folder_path:
-        if os.path.isdir(folder):
-            files = [f for f in os.listdir(
-                folder) if f.endswith(video_extensions)]
-            video_files.extend(os.path.join(folder, f) for f in files)
+    # video_files = []
+    # for folder in folder_path:
+    #     if os.path.isdir(folder):
+    #         files = [f for f in os.listdir(
+    #             folder) if f.endswith(video_extensions)]
+    #         video_files.extend(os.path.join(folder, f) for f in files)
 
     # merge_videos(video_files, output_path)
 
